@@ -10,7 +10,7 @@ const DB_NAME = "Anime";
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.URL_ORIGIN,
     SameSite: "lax",
     credentials: true,
   })
