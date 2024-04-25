@@ -20,7 +20,7 @@ app.use(appRouter);
 
 mongoose
   .connect(
-    `${process.env.DB_HOST + process.env.DB_PORT + "/" + process.env.DB_NAME}`
+    `${process.env.DB_HOST}`
   )
   .catch((error) => console.log("connection error: " + error));
 mongoose.connection.on("open", () => {
