@@ -61,11 +61,9 @@ async function getAllLibraryById(user_id, filter) {
   };
   if (filter) fill.status = filter;
   try {
-    let libraries = await library.find(fill, dataFillable);
-    if(libraries.length !== 0){
-      const {username} = await user.findById(user_id)
+    const libraries = await library.find(fill, dataFillable);
+    const {username} = await user.findById(user_id)
       libraries.username = username
-    }
     return libraries;
   } catch (error) {
     return error;

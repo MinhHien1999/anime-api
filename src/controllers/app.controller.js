@@ -12,7 +12,7 @@ async function SignUp(req, res, next) {
     });
   } catch (error) {
     console.log(error);
-    res.status(400);
+    res.status(404);
   }
 }
 async function login(req, res, next) {
@@ -20,7 +20,7 @@ async function login(req, res, next) {
   try {
     const user = await appService.login(data);
     if (!user) {
-      res.status(400).json({
+      res.status(404).json({
         message: {
           password: "password is incorrect",
         },

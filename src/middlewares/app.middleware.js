@@ -28,9 +28,9 @@ async function validateSignUpForm(req, res, next) {
     message.password = "Password is not a valid";
   }
   if (!isEmpty(message)) {
-    res.status(400).json({
+    res.status(404).json({
       status: "fail",
-      code: 400,
+      code: 404,
       message,
     });
   } else next();
@@ -57,9 +57,9 @@ async function validateLoginForm(req, res, next) {
     message.password = "Password is not a valid";
   }
   if (!isEmpty(message)) {
-    res.status(400).json({
+    res.status(404).json({
       status: "fail",
-      code: 400,
+      code: 404,
       message,
     });
   } else next();
@@ -82,7 +82,26 @@ function verifyToken(req, res, next) {
 function isEmpty(obj) {
   return Object.keys(obj).length === 0 && typeof obj === "object";
 }
+
+async function checkUserId(req, res, next) {
+  const user_id = req.query.user_id;
+  if (user_id.length !== 24) {
+    res.sendStatus(404);
+  } else {
+    try {
+      const result = await User.findOne({ _id: user_id }, { id: 1 });
+      if (result) {
+        next();
+      } else {
+        res.sendStatus(404);
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+}
 module.exports = {
+  checkUserId,
   verifyToken,
   validateSignUpForm,
   validateLoginForm,
