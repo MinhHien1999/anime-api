@@ -52,6 +52,7 @@ async function getAllLibraryById(user_id, filter) {
     anime_title: 1,
     anime_id: 1,
     anime_image: 1,
+    format: 1,
     episode: 1,
     status: 1,
     note: 1,

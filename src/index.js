@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
@@ -8,11 +9,13 @@ const dotenv = require("dotenv").config();
 const port = 3001;
 const DB_NAME = "Anime";
 
+app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.URL_ORIGIN,
-    SameSite: "lax",
+    SameSite: "none",
     credentials: true,
+    HttpOnly: true,
   })
 );
 app.use(express.json());

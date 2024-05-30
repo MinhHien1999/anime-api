@@ -28,9 +28,9 @@ async function validateSignUpForm(req, res, next) {
     message.password = "Password is not a valid";
   }
   if (!isEmpty(message)) {
-    res.status(404).json({
+    res.status(400).json({
       status: "fail",
-      code: 404,
+      code: 400,
       message,
     });
   } else next();
@@ -57,9 +57,9 @@ async function validateLoginForm(req, res, next) {
     message.password = "Password is not a valid";
   }
   if (!isEmpty(message)) {
-    res.status(404).json({
+    res.status(400).json({
       status: "fail",
-      code: 404,
+      code: 400,
       message,
     });
   } else next();

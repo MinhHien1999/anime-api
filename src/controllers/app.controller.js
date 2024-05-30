@@ -12,7 +12,7 @@ async function SignUp(req, res, next) {
     });
   } catch (error) {
     console.log(error);
-    res.status(404);
+    res.status(400);
   }
 }
 async function login(req, res, next) {
@@ -20,7 +20,7 @@ async function login(req, res, next) {
   try {
     const user = await appService.login(data);
     if (!user) {
-      res.status(404).json({
+      res.status(400).json({
         message: {
           password: "password is incorrect",
         },
@@ -37,8 +37,8 @@ async function login(req, res, next) {
         (err, token) => {
           res.status(200).json({
             _id: user._id,
-            status: "success",
-            code: 200,
+            statusText: "success",
+            statusCode: 200,
             message: "Thanks for signing up",
             token: token,
           });
@@ -54,6 +54,7 @@ async function addLibrary(req, res, next) {
   try {
     const library = await appService.addLibrary(data);
     res.status(200).send({
+      status: 200,
       message: "Mark saved successfully",
     });
   } catch (error) {
@@ -98,7 +99,10 @@ async function deleteAnimeLibrary(req, res, next) {
   try {
     const library_id = req.params.library_id;
     const library = await appService.deleteMark(library_id);
-    res.status(200).send({ message: "delete successfully" });
+    res.status(200).send({ 
+      status: 200,
+      message: "delete successfully" 
+    });
   } catch (error) {
     throw new Error("error: " + error.message);
   }

@@ -22,6 +22,9 @@ const librarySchema = new Schema(
       type: String,
       required: [true, "Episode is a required field"],
     },
+    format: {
+      type: String,
+    },
     status: {
       type: String,
       enum: STATUS,
@@ -46,6 +49,7 @@ librarySchema.statics.saveAnime = async function (data) {
     anime_title: data.anime_title,
     anime_id: data.anime_id,
     anime_image: data.anime_image,
+    format: data.format,
     episode: data.episode,
     note: data.note,
     status: data.status,
